@@ -108,7 +108,7 @@ app.use((req, res, next) => {
 });
 app.use(express.json());
 
-app.use('/article/', require('./route/articles'));
+app.use('/blog/', require('./route/blog'));
 app.use('/', require('./route/user'));
 app.use('/auth/', require('./route/auth'));
 app.use('/admin/', require('./route/admin'));

@@ -21,7 +21,7 @@ const ArticleBin = require("../model/article/bin");
 const { default: mongoose } = require('mongoose');
 
 // Blog reading page
-router.get("/blog/:slug", (req, res, next) => {
+router.get("/:slug", (req, res, next) => {
     try {
         res.render("pages/blog_read", { title: "", description: "" });
     } catch (error) {
