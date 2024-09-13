@@ -16,8 +16,16 @@ const Article = require("../model/article/model");
 const ArticleBin = require("../model/article/bin");
 const { default: mongoose } = require('mongoose');
 
+// Admin login page
+router.get("/login", (req, res, next) => {
+  try {
+    res.render("pages/login", { title: "", description: "" });
+  } catch (error) {
+    res.send("Something went wrong from our end, please contact the administartor or developer :)");
+  }
+});
 
-// User login
+// Admin login POST
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
