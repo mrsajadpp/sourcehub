@@ -1,0 +1,37 @@
+<main class="kh">2
+    <section id="filtered-cards" class="bg-light_grey pt-8 pb-16" data-paginate="1" data-tag-filters="1">
+        <div class="mx-auto px-5 max-w-6xl">
+            <div class="flex flex-wrap gap-8 md:mb-16 justify-between">
+            </div>
+            <div id="browse-cards" class="gap-8 sm:gap-12 grid grid-cols-330 justify-center xl:justify-start">
+                {{#each blogs}}
+                <a class="block max-w-full w-[330px]"
+                    href="/blog/{{this.slug}}">
+                    <div class="relative">
+                        <img class="w-full rounded-t-xl object-cover"
+                            src="{{this.image}}" onerror="this.onerror=null;this.src='https://images.prismic.io/euautomation/ZrMu70aF0TcGIvaF_08.08.24-Prismic_Image.png?auto=format,compress&rect=36,0,1433,860&w=330&h=198';" 
+                            alt="{{this.title}}" width="330" height="198"
+                            style="aspect-ratio: 16 / 9;">
+                    </div>
+                    <p class="py-4 font-semibold flex justify-between gap-4">
+                        <span class="bg-teal-500 rounded-lg px-4 py-1">
+                            Blog
+                        </span>
+                    </p>
+                    <h4 class="pb-3">
+                        {{this.title}}
+                    </h4>
+
+
+                    <p class="">
+                        {{this.description}}
+                    </p>
+
+
+                </a>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+
+</main>
