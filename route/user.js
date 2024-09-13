@@ -23,16 +23,17 @@ const ArticleBin = require("../model/article/bin");
 // Home page route
 router.get("/", (req, res, next) => {
   try {
-    res.render("pages/home", { title: "", description: "" });
+    res.render("pages/home", { title: "Source Hub", description: "" });
   } catch (error) {
     res.status(500).send("Something went wrong from our end, please contact the administartor or developer :)");
   }
 });
 
 // Blog page route
-router.get("/blog", (req, res, next) => {
+router.get("/blog", async (req, res, next) => {
   try {
-    res.render("pages/blog", { title: "", description: "" });
+    let blogs = await Article.find().lean();
+    res.render("pages/blog", { title: "Blog / Source Hub", description: "", blogs });
   } catch (error) {
     res.status(500).send("Something went wrong from our end, please contact the administartor or developer :)");
   }
