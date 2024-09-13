@@ -25,7 +25,7 @@ router.get("/", (req, res, next) => {
   try {
     res.render("pages/home", { title: "", description: "" });
   } catch (error) {
-    res.send("Something went wrong from our end, please contact the administartor or developer :)");
+    res.status(500).send("Something went wrong from our end, please contact the administartor or developer :)");
   }
 });
 
@@ -34,7 +34,7 @@ router.get("/blog", (req, res, next) => {
   try {
     res.render("pages/blog", { title: "", description: "" });
   } catch (error) {
-    res.send("Something went wrong from our end, please contact the administartor or developer :)");
+    res.status(500).send("Something went wrong from our end, please contact the administartor or developer :)");
   }
 });
 
@@ -43,7 +43,7 @@ router.get("/quote", (req, res, next) => {
   try {
     res.render("pages/quote", { title: "", description: "" });
   } catch (error) {
-    res.send("Something went wrong from our end, please contact the administartor or developer :)");
+    res.status(500).send("Something went wrong from our end, please contact the administartor or developer :)");
   }
 });
 

@@ -21,7 +21,7 @@ router.get("/login", (req, res, next) => {
   try {
     res.render("pages/login", { title: "", description: "" });
   } catch (error) {
-    res.send("Something went wrong from our end, please contact the administartor or developer :)");
+    res.status(500).send("Something went wrong from our end, please contact the administartor or developer :)");
   }
 });
 
