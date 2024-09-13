@@ -21,7 +21,7 @@ const ArticleBin = require("../model/article/bin");
 const { default: mongoose } = require('mongoose');
 
 // Blog writing GET
-router.get("/blog/write", (req, res, next) => {
+router.get("/blog/write", auth.verifyAdmin, (req, res, next) => {
     try {
         res.render("pages/admin/write_blog", { title: "", description: "" });
     } catch (error) {
@@ -58,7 +58,7 @@ router.post('/blog/write', auth.verifyAdmin, async (req, res) => {
 });
 
 // Blog updating GET
-router.get("/blog/update", (req, res, next) => {
+router.get("/blog/update", auth.verifyAdmin, (req, res, next) => {
     try {
         res.render("pages/admin/update_blog", { title: "", description: "" });
     } catch (error) {
