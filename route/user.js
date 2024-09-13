@@ -22,7 +22,7 @@ const ArticleBin = require("../model/article/bin");
 
 router.get("/", (req, res, next) => {
   try {
-    res.render({})
+    res.render("pages/home", { title: "", description: "" });
   } catch (error) {
     res.send("Something went wrong from our end, please contact the administartor or developer :)");
   }

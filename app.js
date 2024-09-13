@@ -106,10 +106,10 @@ app.use((req, res, next) => {
 });
 app.use(express.json());
 
-app.use('/api/article/', require('./route/articles'));
-app.use('/api/user/', require('./route/user'));
-app.use('/api/auth/', require('./route/auth'));
-app.use('/api/admin/', require('./route/admin'));
+app.use('/article/', require('./route/articles'));
+app.use('/', require('./route/user'));
+app.use('/auth/', require('./route/auth'));
+app.use('/admin/', require('./route/admin'));
 
 app.listen(PORT, connectDB(), () => {
     console.log(`🚀 Listening at http://127.0.0.1:${PORT}/`);
