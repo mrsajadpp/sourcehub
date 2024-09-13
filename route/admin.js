@@ -42,8 +42,6 @@ router.get("/blog/write", auth.verifyAdmin, (req, res, next) => {
 router.post('/blog/write', auth.verifyAdmin, async (req, res) => {
     try {
         const { title, description, content } = req.body;
-        console.log(req.body);
-        
 
         if (!title) res.render("write_blog", { title: "Write Blog", title, description, content, error: "Title is required" });
         if (!description) res.render("write_blog", { title: "Write Blog", title, description, content, error: "Description is required" });
