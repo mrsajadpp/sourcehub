@@ -20,6 +20,15 @@ const Article = require("../model/article/model");
 const ArticleBin = require("../model/article/bin");
 const { default: mongoose } = require('mongoose');
 
+// Blogs list page
+router.get("/", auth.verifyAdmin, (req, res, next) => {
+    try {
+        res.render("pages/admin/blogs", { title: "", description: "" });
+    } catch (error) {
+        res.status(500).send("Something went wrong from our end, please contact the administartor or developer :)");
+    }
+});
+
 // Blog writing GET
 router.get("/blog/write", auth.verifyAdmin, (req, res, next) => {
     try {
