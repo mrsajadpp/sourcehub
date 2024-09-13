@@ -6,6 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
     <meta name="description" content="{{description}}">
+    <meta property="og:description"
+        content="{{description}}">
+    <meta property="twitter:description" content="{{description}}">
+
+
+    {{#if blog}}
+    <meta name="author" content="Source Hub">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.sourcehub.com/blog/{{blog.slug}}">
+    <meta property="og:title" content="{{blog.title}}">
+    <meta property="og:image" content="{{blog.image}}">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.sourcehub.com/blog/{{blog.slug}}">
+    <meta property="twitter:title" content="{{blog.title}}">
+    <meta property="twitter:image" content="{{blog.image}}">
+
+    <!-- Canonical Link -->
+    <link rel="canonical" href="https://www.sourcehub.com/blog/{{blog.slug}}">
+    {{/if}}
     <link rel="stylesheet" href="/css/style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
