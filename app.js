@@ -111,6 +111,10 @@ app.use('/', require('./route/user'));
 app.use('/auth/', require('./route/auth'));
 app.use('/admin/', require('./route/admin'));
 
+app.use("*", (req, res, next) => {
+    res.status(404).send("Hmm, not found :)");
+});
+
 app.listen(PORT, connectDB(), () => {
     console.log(`🚀 Listening at http://127.0.0.1:${PORT}/`);
 });
