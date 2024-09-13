@@ -98,11 +98,18 @@ router.post('/blog/update', auth.verifyAdmin, async (req, res) => {
 
         if (!blog) res.render("write_blog", { title: "Write Blog", title, description, content, blog_id, error: "Blog not found" });
 
+        // Load the HTML into Cheerio
+        const $ = await cheerio.load(content);
+
+        // Find the first image and get its 'src' attribute
+        const firstImageSrc = await $('img').first().attr('src');
+
         await Article.updateOne({ _id: new mongoose.Types.ObjectId(blog_id) }, {
             title,
             description,
             content,
-            updated_at: new Date()
+            updated_at: new Date(),
+            image: firstImageSrc
         });
 
         res.redirect('/admin/');
