@@ -20,6 +20,15 @@ const Article = require("../model/article/model");
 const ArticleBin = require("../model/article/bin");
 const { default: mongoose } = require('mongoose');
 
+// Blog writing GET
+router.get("/blog/write", (req, res, next) => {
+    try {
+        res.render("pages/admin/write_blog", { title: "", description: "" });
+    } catch (error) {
+        res.status(500).send("Something went wrong from our end, please contact the administartor or developer :)");
+    }
+});
+
 // Blog writing POST
 router.post('/blog/write', auth.verifyAdmin, async (req, res) => {
     try {
@@ -45,6 +54,15 @@ router.post('/blog/write', auth.verifyAdmin, async (req, res) => {
 
     } catch (error) {
         res.status(500).json({ error: 'Server error' });
+    }
+});
+
+// Blog updating GET
+router.get("/blog/update", (req, res, next) => {
+    try {
+        res.render("pages/admin/update_blog", { title: "", description: "" });
+    } catch (error) {
+        res.status(500).send("Something went wrong from our end, please contact the administartor or developer :)");
     }
 });
 
