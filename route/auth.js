@@ -19,7 +19,7 @@ const { default: mongoose } = require('mongoose');
 // Admin login page
 router.get("/login", (req, res, next) => {
   try {
-    res.render("pages/login", { title: "", description: "" });
+    res.render("pages/login", { title: "Login", description: "", admin: true });
   } catch (error) {
     res.status(500).send("Something went wrong from our end, please contact the administartor or developer :)");
   }
@@ -29,9 +29,6 @@ router.get("/login", (req, res, next) => {
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
-    const deviceInfo = req.device;
-    const clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-    var geo = await geoip.lookup(clientIp);
 
     if (!email) {
       return res.status(400).json({ error: 'Email is required' });
@@ -39,12 +36,9 @@ router.post('/login', async (req, res) => {
     if (!password) {
       return res.status(400).json({ error: 'Password is required' });
     }
-    if (!validator.validateEmail(email)) {
-      return res.status(400).json({ error: 'Invalid email address' });
-    }
     if (email == "admin@sourcehub.com" && password == "admin@1234") {
       req.session.logged = true;
-      return res.status(200).json({ message: 'Login successfully' });
+      return res.redirect('/admin/');
     } else {
       return res.status(400).json({ error: 'Invalid email or password' });
     }

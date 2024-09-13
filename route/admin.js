@@ -24,7 +24,7 @@ const { default: mongoose } = require('mongoose');
 // Blogs list page
 router.get("/", auth.verifyAdmin, (req, res, next) => {
     try {
-        res.render("pages/admin/blogs", { title: "", description: "" });
+        res.render("pages/admin/blogs", { title: "", description: "", admin: true });
     } catch (error) {
         res.status(500).send("Something went wrong from our end, please contact the administartor or developer :)");
     }
@@ -33,7 +33,7 @@ router.get("/", auth.verifyAdmin, (req, res, next) => {
 // Blog writing GET
 router.get("/blog/write", auth.verifyAdmin, (req, res, next) => {
     try {
-        res.render("pages/admin/write_blog", { title: "", description: "" });
+        res.render("pages/admin/write_blog", { title: "", description: "", admin: true });
     } catch (error) {
         res.status(500).send("Something went wrong from our end, please contact the administartor or developer :)");
     }
@@ -78,7 +78,7 @@ router.post('/blog/write', auth.verifyAdmin, async (req, res) => {
 // Blog updating GET
 router.get("/blog/update", auth.verifyAdmin, (req, res, next) => {
     try {
-        res.render("pages/admin/update_blog", { title: "", description: "" });
+        res.render("pages/admin/update_blog", { title: "", description: "", admin: true });
     } catch (error) {
         res.status(500).send("Something went wrong from our end, please contact the administartor or developer :)");
     }

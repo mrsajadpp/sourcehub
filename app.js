@@ -106,6 +106,11 @@ app.use((req, res, next) => {
     req.device = device;
     next();
 });
+
+// Middleware for parsing form data
+app.use(express.urlencoded({ extended: true }));
+
+// Middleware for parsing JSON data (if needed)
 app.use(express.json());
 
 app.use('/blog/', require('./route/blog'));
