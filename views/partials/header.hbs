@@ -51,8 +51,7 @@
                     <div style="transition: flex-basis 200ms ease-in-out;"
                         class="tablet-nav flex lg:flex-grow items-center ml-4 justify-end lg:w-auto lg:ml-2">
                         <div style="min-width: 268px;" class="hidden sm:block mr-3 lg:mr-0 w-full">
-                            <form action="/user/search"
-                                data-suggestions="/user/suggestions" method="post"
+                            <form action="/user/search" data-suggestions="/user/suggestions" method="post"
                                 class="desktop-nav part-search relative w-full">
                                 <div
                                     class="flex items-center w-full rounded-full overflow-hidden group z-10 relative bg-light_grey focus-within:shadow-lg">
@@ -164,8 +163,7 @@
                     </div>
                 </div>
                 <div class="nav-search-bar mx-4 sm:hidden mt-3">
-                    <form action="/user/search"
-                        data-suggestions="/user/suggestions" method="post"
+                    <form action="/user/search" data-suggestions="/user/suggestions" method="post"
                         class=" part-search relative sm:max-w-xs">
                         <div
                             class="flex items-center w-full rounded-full overflow-hidden group z-10 relative bg-white border border-coral-500 focus-within:shadow-lg h-[2.245rem]">
@@ -444,3 +442,57 @@
         </div>
     </nav>
 </header>
+
+<script src="https://assets.euautomation.com/dist/app.js?id=2cc233be1a548d491fca17d131dcc004"></script>
+<script>
+    window.addEventListener('load', function () {
+        var cc = initCookieConsent();
+
+        cc.run({
+            current_lang: 'en',
+            gui_options: {
+                consent_modal: {
+                    layout: 'box',
+                    position: 'bottom left',
+                    swap_buttons: true,
+                }
+            },
+            languages: {
+                'en': {
+                    consent_modal: {
+                        title: 'EU Automation use cookies',
+                        description: 'We use cookies to ensure that our website works properly and securely. By clicking accept all cookies, you are allowing us to provide you with the best possible experience.',
+                        primary_btn: {
+                            text: 'Accept all cookies',
+                            role: 'accept_all',
+                        },
+                        secondary_btn: {
+                            text: 'Cookie Policy',
+                            role: 'link',
+                            href: 'https://www.euautomation.com/uk/cookies',
+                        }
+                    },
+                    settings_modal: {
+                        blocks: []
+                    }
+                }
+            },
+            onFirstAction: function (userPreferences, cookie) {
+                if (window.gtag) {
+                    window.gtag('consent', 'update', {
+                        'ad_storage': 'granted',
+                        'analytics_storage': 'granted',
+                        'personalization_storage': 'granted',
+                        'security_storage': 'granted',
+                        'functionality_storage': 'granted'
+                    });
+                    window.gtag('event', 'consent_update');
+                }
+
+                if (window.plausible && typeof window.plausible === "function") {
+                    window.plausible('Agree To Cookies');
+                }
+            }
+        });
+    });
+</script>
