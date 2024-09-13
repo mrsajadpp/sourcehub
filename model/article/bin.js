@@ -21,7 +21,11 @@ const articleSchema = new Schema({
     updated_at: {
         type: String,
         default: Date.now,
-    }
+    },
+    image: {
+        type: String,
+        required: true,
+    },
 });
 
 const Article = mongoose.model('ArticleBin', articleSchema);

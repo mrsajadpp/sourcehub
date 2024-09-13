@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const moment = require('moment');
 var geoip = require('geoip-lite');
+const cheerio = require('cheerio');
 
 // Utils
 const validator = require("../util/validate");
@@ -28,7 +29,7 @@ router.get("/", auth.verifyAdmin, (req, res, next) => {
         res.status(500).send("Something went wrong from our end, please contact the administartor or developer :)");
     }
 });
- 
+
 // Blog writing GET
 router.get("/blog/write", auth.verifyAdmin, (req, res, next) => {
     try {
@@ -48,13 +49,20 @@ router.post('/blog/write', auth.verifyAdmin, async (req, res) => {
         if (!content) res.render("write_blog", { title: "Write Blog", title, description, content, error: "Content is required" });
 
         let slug = await format.generateSlug(title);
- 
+
+        // Load the HTML into Cheerio
+        const $ = await cheerio.load(htmlString);
+
+        // Find the first image and get its 'src' attribute
+        const firstImageSrc = await $('img').first().attr('src');
+
         let blog = new Article({
             title,
             description,
             content,
             updated_at: new Date(),
-            slug: slug
+            slug: slug,
+            image: firstImageSrc
         });
 
         await blog.save();
