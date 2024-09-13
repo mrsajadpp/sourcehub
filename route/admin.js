@@ -51,7 +51,7 @@ router.post('/blog/write', auth.verifyAdmin, async (req, res) => {
         let slug = await format.generateSlug(title);
 
         // Load the HTML into Cheerio
-        const $ = await cheerio.load(htmlString);
+        const $ = await cheerio.load(content);
 
         // Find the first image and get its 'src' attribute
         const firstImageSrc = await $('img').first().attr('src');
@@ -70,6 +70,7 @@ router.post('/blog/write', auth.verifyAdmin, async (req, res) => {
         res.redirect('/admin/');
 
     } catch (error) {
+        console.error(error);
         res.status(500).json({ error: 'Server error' });
     }
 });
