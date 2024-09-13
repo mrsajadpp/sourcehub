@@ -53,7 +53,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(cors());
 app.use(favicon(path.join(__dirname, 'public', '/icon/favicon.png')));
 app.engine('hbs', handlebars.engine({
-    extname: 'hbs', defaultLayout: 'layout', layoutsDir: __dirname + '/views/layouts/', partialsDir: __dirname + '/views/partials/', helpers: {
+    extname: 'hbs', defaultLayout: 'layout', layoutsDir: __dirname + '/views/', partialsDir: __dirname + '/views/partials/', helpers: {
         ifequal: function (arg1, arg2, options) {
             return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
         },
