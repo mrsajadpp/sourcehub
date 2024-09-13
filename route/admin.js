@@ -20,6 +20,80 @@ const Article = require("../model/article/model");
 const ArticleBin = require("../model/article/bin");
 const { default: mongoose } = require('mongoose');
 
+// Blog writing POST
+router.post('/blog/write', auth.verifyAdmin, async (req, res) => {
+    try {
+        const { title, description, content } = req.body;
 
+        if (!title) res.render("write_blog", { title: "Write Blog", title, description, content, error: "Title is required" });
+        if (!description) res.render("write_blog", { title: "Write Blog", title, description, content, error: "Description is required" });
+        if (!content) res.render("write_blog", { title: "Write Blog", title, description, content, error: "Content is required" });
+
+        let slug = await format.generateSlug(title);
+
+        let blog = new Article({
+            title,
+            description,
+            content,
+            updated_at: new Date(),
+            slug: slug
+        });
+
+        await blog.save();
+
+        res.redirect('/admin/');
+
+    } catch (error) {
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
+// Blog updating POST
+router.post('/blog/update', auth.verifyAdmin, async (req, res) => {
+    try {
+        const { title, description, content, blog_id } = req.body;
+
+        if (!title) res.render("write_blog", { title: "Write Blog", title, description, content, blog_id, error: "Title is required" });
+        if (!description) res.render("write_blog", { title: "Write Blog", title, description, content, blog_id, error: "Description is required" });
+        if (!content) res.render("write_blog", { title: "Write Blog", title, description, content, blog_id, error: "Content is required" });
+        if (!blog_id) res.render("write_blog", { title: "Write Blog", title, description, content, blog_id, error: "Blog ID is required" });
+
+        let blog = await Article.findOne({ _id: new mongoose.Types.ObjectId(blog_id) }).lean();
+
+        if (!blog) res.render("write_blog", { title: "Write Blog", title, description, content, blog_id, error: "Blog not found" });
+
+        await Article.updateOne({ _id: new mongoose.Types.ObjectId(blog_id) }, {
+            title,
+            description,
+            content,
+            updated_at: new Date()
+        });
+
+        res.redirect('/admin/');
+
+    } catch (error) {
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
+// Blog deletting POST
+router.post('/blog/delete', auth.verifyAdmin, async (req, res) => {
+    try {
+        const { blog_id } = req.body;
+
+        if (!blog_id) res.render("write_blog", { title: "Write Blog", title, description, content, blog_id, error: "Blog ID is required" });
+
+        let blog = await Article.findOne({ _id: new mongoose.Types.ObjectId(blog_id) }).lean();
+
+        if (!blog) res.render("write_blog", { title: "Write Blog", title, description, content, blog_id, error: "Blog not found" });
+
+        await Article.deleteOne({ _id: new mongoose.Types.ObjectId(blog_id) });
+
+        res.redirect('/admin/');
+
+    } catch (error) {
+        res.status(500).json({ error: 'Server error' });
+    }
+});
 
 module.exports = router;

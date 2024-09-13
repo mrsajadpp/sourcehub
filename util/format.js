@@ -30,7 +30,6 @@ module.exports = {
 async function checkSlugExists(slug) {
     const articleExists = await Article.exists({ slug });
     const binExists = await ArticleBin.exists({ slug });
-    const pendingExists = await ArticlePending.exists({ slug });
 
-    return articleExists || binExists || pendingExists;
+    return articleExists || binExists;
 }
