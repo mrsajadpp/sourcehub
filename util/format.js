@@ -1,7 +1,6 @@
 // Database Models Importing
 const Article = require("../model/article/model");
 const ArticleBin = require("../model/article/bin");
-const ArticlePending = require("../model/article/pending");
 
 module.exports = {
     generateSlug: async (str) => {
@@ -11,7 +10,7 @@ module.exports = {
             .replace(/_+/g, '_');
 
         // Ensure the slug is lowercase
-        slug = slug.toLowerCase();
+        slug = slug.toLowerCase(); 
 
         // Check if the slug exists in any of the collections
         let isSlugExist = await checkSlugExists(slug);
