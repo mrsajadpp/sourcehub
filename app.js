@@ -48,6 +48,8 @@ app.use(
 
 app.use(morgan("combined", { stream: accessLogStream }));
 
+app.use(express.static('public'))
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.use(cors());
