@@ -87,14 +87,14 @@ router.get("/blog/update/:blog_id", auth.verifyAdmin, async (req, res, next) => 
 });
 
 // Blog updating POST
-router.post('/blog/update', auth.verifyAdmin, async (req, res) => {
+router.post('/blog/update/:blog_id', auth.verifyAdmin, async (req, res) => {
     try {
-        const { title, description, content, blog_id } = req.body;
+        const { title, description, content } = req.body;
 
         if (!title) res.render("write_blog", { title: "Write Blog", title, description, content, blog_id, error: "Title is required" });
         if (!description) res.render("write_blog", { title: "Write Blog", title, description, content, blog_id, error: "Description is required" });
         if (!content) res.render("write_blog", { title: "Write Blog", title, description, content, blog_id, error: "Content is required" });
-        if (!blog_id) res.render("write_blog", { title: "Write Blog", title, description, content, blog_id, error: "Blog ID is required" });
+        if (!req.params.blog_id) res.render("write_blog", { title: "Write Blog", title, description, content, blog_id, error: "Blog ID is required" });
 
         let blog = await Article.findOne({ _id: new mongoose.Types.ObjectId(blog_id) }).lean();
 
@@ -106,7 +106,7 @@ router.post('/blog/update', auth.verifyAdmin, async (req, res) => {
         // Find the first image and get its 'src' attribute
         const firstImageSrc = await $('img').first().attr('src');
 
-        await Article.updateOne({ _id: new mongoose.Types.ObjectId(blog_id) }, {
+        await Article.updateOne({ _id: new mongoose.Types.ObjectId(req.params.blog_id) }, {
             title,
             description,
             content,
