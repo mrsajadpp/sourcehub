@@ -4,15 +4,15 @@
 <div class="body">
     <div class="container">
             <form class="position-relative" id="blogForm">
-                        <h3 class="sign" style="margin-bottom: 20px;">New Blog</h3>
+                        <h3 class="sign" style="margin-bottom: 20px;">Update Blog</h3>
                                     <div class="mb-4">
                                                     <h5>Title</h5>
-                                                                    <input type="text" class="form-control" id="title" name="title">
+                                                                    <input type="text" class="form-control" id="title" name="title" placeholder="{{blog.title}}">
                                                                                     <p id="error1" style="font-size:11px; color:red; font-family:helvetica; display:none;">Title</p>
                                                                                                 </div>
                                                                                                             <div class="mb-3">
                                                                                                                             <h5>Description</h5>
-                                                                                                                                            <textarea name="description" class="form-control" id="description" placeholder="description"></textarea>
+                                                                                                                                            <textarea name="description" class="form-control" id="description" placeholder="description">{{blog.description}}</textarea>
                                                                                                                                                         </div>
 
                                                                                                                                                                 </div>
@@ -22,8 +22,7 @@
                                                                                                                                                                                                             <script>RTE_DefaultConfig.url_base='richtexteditor'</script>
                                                                                                                                                                                                                         <script type="text/javascript" src='./src/js/plugins.js'></script>
                                                                                                                                                                                                                                     <div id="div_editor1">
-                                                                                                                                                                                                                                                    <p></p>
-                                                                                                                                                                                                                                                                    <p><img src='' /></p>
+                                                                                                                                                                                                                                                    {{{blog.content}}}
                                                                                                                                                                                                                                                                                 </div>
 
                                                                                                                                                                                                                                                                                             <script>
