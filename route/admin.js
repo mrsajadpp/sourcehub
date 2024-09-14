@@ -96,9 +96,9 @@ router.post('/blog/update/:blog_id', auth.verifyAdmin, async (req, res) => {
         if (!content) res.render("write_blog", { title: "Write Blog", title, description, content, blog_id, error: "Content is required" });
         if (!req.params.blog_id) res.render("write_blog", { title: "Write Blog", title, description, content, blog_id, error: "Blog ID is required" });
 
-        let blog = await Article.findOne({ _id: new mongoose.Types.ObjectId(blog_id) }).lean();
+        let blog = await Article.findOne({ _id: new mongoose.Types.ObjectId(req.params.blog_id) }).lean();
 
-        if (!blog) res.render("write_blog", { title: "Write Blog", title, description, content, blog_id, error: "Blog not found" });
+        if (!blog) res.render("write_blog", { title: "Write Blog", title, description, content, blog_id: req.params.blog_id, error: "Blog not found" });
 
         // Load the HTML into Cheerio
         const $ = await cheerio.load(content);
