@@ -20,6 +20,7 @@ const auth = require("../middleware/auth");
 const Article = require("../model/article/model");
 const ArticleBin = require("../model/article/bin");
 const { default: mongoose } = require('mongoose');
+const { listen } = require('express/lib/application');
 
 // Blogs list page
 router.get("/", auth.verifyAdmin, (req, res, next) => {
@@ -76,9 +77,10 @@ router.post('/blog/write', auth.verifyAdmin, async (req, res) => {
 });
 
 // Blog updating GET
-router.get("/blog/update", auth.verifyAdmin, (req, res, next) => {
+router.get("/blog/update/:blog_id", auth.verifyAdmin, async (req, res, next) => {
     try {
-        res.render("pages/admin/update_blog", { title: "", description: "", admin: true });
+        let blog = await Article.findOne({ _id: new mongoose.Types.ObjectId(req.params.blog_id) }).lean();
+        res.render("pages/admin/update_blog", { title: "", description: "", admin: true, blog });
     } catch (error) {
         res.status(500).send("Something went wrong from our end, please contact the administartor or developer :)");
     }
