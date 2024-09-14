@@ -37,6 +37,10 @@
     {{>header}}
     {{/if}}
     {{{body}}}
+    {{#if admin}}
+    {{else}}
+    {{>footer}}
+    {{/if}}
 </body>
 
 </html>
