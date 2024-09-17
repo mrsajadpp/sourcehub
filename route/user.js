@@ -42,7 +42,7 @@ router.get("/blog", async (req, res, next) => {
 // Quote page rout
 router.get("/quote", (req, res, next) => {
   try {
-    res.render("pages/quote", { title: "", description: "" });
+    res.render("pages/quote", { title: "Get a Quote", description: "" });
   } catch (error) {
     res.status(500).send("Something went wrong from our end, please contact the administartor or developer :)");
   }
