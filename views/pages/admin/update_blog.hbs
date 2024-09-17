@@ -1,75 +1,79 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <link rel="stylesheet" href="./style.css">
 
 <div class="body">
-    <div class="container">
-            <form class="position-relative" id="blogForm">
+        <div class="container">
+                <form class="position-relative" id="blogForm">
                         <h3 class="sign" style="margin-bottom: 20px;">Update Blog</h3>
-                                    <div class="mb-4">
-                                                    <h5>Title</h5>
-                                                                    <input type="text" class="form-control" id="title" name="title" placeholder="{{blog.title}}">
-                                                                                    <p id="error1" style="font-size:11px; color:red; font-family:helvetica; display:none;">Title</p>
-                                                                                                </div>
-                                                                                                            <div class="mb-3">
-                                                                                                                            <h5>Description</h5>
-                                                                                                                                            <textarea name="description" class="form-control" id="description" placeholder="description">{{blog.description}}</textarea>
-                                                                                                                                                        </div>
+                        <div class="mb-4">
+                                <h5>Title</h5>
+                                <input type="text" class="form-control" id="title" name="title"
+                                        placeholder="{{blog.title}}">
+                                <p id="error1" style="font-size:11px; color:red; font-family:helvetica; display:none;">
+                                        Title</p>
+                        </div>
+                        <div class="mb-3">
+                                <h5>Description</h5>
+                                <textarea name="description" class="form-control" id="description"
+                                        placeholder="description">{{blog.description}}</textarea>
+                        </div>
 
-                                                                                                                                                                </div>
-                                                                                                                                                                        <div class="hs-docs-content-divider" name="content">
-                                                                                                                                                                                    <link rel="stylesheet" href="./src/css/richtext.css" />
-                                                                                                                                                                                                <script type="text/javascript" src="./src/js/rte.js"></script>
-                                                                                                                                                                                                            <script>RTE_DefaultConfig.url_base='richtexteditor'</script>
-                                                                                                                                                                                                                        <script type="text/javascript" src='./src/js/plugins.js'></script>
-                                                                                                                                                                                                                                    <div id="div_editor1">
-                                                                                                                                                                                                                                                    {{{blog.content}}}
-                                                                                                                                                                                                                                                                                </div>
+        </div>
+        <div class="hs-docs-content-divider" name="content">
+                <link rel="stylesheet" href="./src/css/richtext.css" />
+                <script type="text/javascript" src="./src/js/rte.js"></script>
+                <script>RTE_DefaultConfig.url_base = 'richtexteditor'</script>
+                <script type="text/javascript" src='./src/js/plugins.js'></script>
+                <div id="div_editor1">
+                        {{{blog.content}}}
+                </div>
 
-                                                                                                                                                                                                                                                                                            <script>
-                                                                                                                                                                                                                                                                                                            var editor1 = new RichTextEditor("#div_editor1");
-                                                                                                                                                                                                                                                                                                                        </script>
-                                                                                                                                                                                                                                                                                                                                </div>
+                <script>
+                        var editor1 = new RichTextEditor("#div_editor1");
+                </script>
+        </div>
 
-                                                                                                                                                                                                                                                                                                                                        <button type="button" class="btn primary" id="btn" style="background-color: orange !important;">Save</button>  
-                                                                                                                                                                                                                                                                                                                                            </form>
-                                                                                                                                                                                                                                                                                                                                            </div>
+        <button type="button" class="btn primary" id="btn" style="background-color: orange !important;">Save</button>
+        </form>
+</div>
 
-                                                                                                                                                                                                                                                                                                                                            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
-                                                                                                                                                                                                                                                                                                                                            <script>
-                                                                                                                                                                                                                                                                                                                                                document.getElementById('btn').addEventListener('click', function() {
-                                                                                                                                                                                                                                                                                                                                                        const title = document.getElementById('title').value;
-                                                                                                                                                                                                                                                                                                                                                                const description = document.getElementById('description').value;
-                                                                                                                                                                                                                                                                                                                                                                        const content = editor1.getHTMLCode(); // Get content from the rich text editor
+<script>
+        document.getElementById('btn').addEventListener('click', function () {
+                const title = document.getElementById('title').value;
+                const description = document.getElementById('description').value;
+                const content = editor1.getHTMLCode(); // Get content from the rich text editor
 
-                                                                                                                                                                                                                                                                                                                                                                                if (!title || !description || !content) {
-                                                                                                                                                                                                                                                                                                                                                                                            alert('Please fill all fields');
-                                                                                                                                                                                                                                                                                                                                                                                                        return;
-                                                                                                                                                                                                                                                                                                                                                                                                                }
+                if (!title || !description || !content) {
+                        alert('Please fill all fields');
+                        return;
+                }
 
-                                                                                                                                                                                                                                                                                                                                                                                                                        // Prepare the data to send
-                                                                                                                                                                                                                                                                                                                                                                                                                                const data = {
-                                                                                                                                                                                                                                                                                                                                                                                                                                            title: title,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        description: description,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    content: content
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                            };
+                // Prepare the data to send
+                const data = {
+                        title: title,
+                        description: description,
+                        content: content
+                };
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    // Send a POST request to the /publish API
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            fetch('/blog/update/{{blog._id}}', {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        method: 'POST',
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    headers: {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    'Content-Type': 'application/json'
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                },
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            body: JSON.stringify(data)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    })
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            .then(response => response.json())
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    .then(result => {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                console.log(result);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            alert('Blog post saved successfully!');
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    })
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            .catch(error => {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        console.error('Error:', error);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    alert('An error occurred while saving the blog post.');
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            });
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                });
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </script>
+                // Send a POST request to the /publish API
+                fetch('/blog/update/{{blog._id}}', {
+                        method: 'POST',
+                        headers: {
+                                'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                })
+                        .then(response => response.json())
+                        .then(result => {
+                                console.log(result);
+                                alert('Blog post saved successfully!');
+                        })
+                        .catch(error => {
+                                console.error('Error:', error);
+                                alert('An error occurred while saving the blog post.');
+                        });
+        });
+</script>

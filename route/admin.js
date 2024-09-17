@@ -23,9 +23,10 @@ const { default: mongoose } = require('mongoose');
 const { listen } = require('express/lib/application');
 
 // Blogs list page
-router.get("/", auth.verifyAdmin, (req, res, next) => {
+router.get("/", auth.verifyAdmin, async (req, res, next) => {
     try {
-        res.render("pages/admin/blogs", { title: "", description: "", admin: true });
+        let blogs = await Article.find().lean();
+        res.render("pages/admin/blogs", { title: "", description: "", admin: true, blogs });
     } catch (error) {
         res.status(500).send("Something went wrong from our end, please contact the administartor or developer :)");
     }
@@ -122,9 +123,9 @@ router.post('/blog/update/:blog_id', auth.verifyAdmin, async (req, res) => {
 });
 
 // Blog deletting POST
-router.post('/blog/delete', auth.verifyAdmin, async (req, res) => {
+router.get('/blog/delete/:blog_id', auth.verifyAdmin, async (req, res) => {
     try {
-        const { blog_id } = req.body;
+        const { blog_id } = req.params;
 
         if (!blog_id) res.render("write_blog", { title: "Write Blog", title, description, content, blog_id, error: "Blog ID is required" });
 
