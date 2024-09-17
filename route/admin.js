@@ -25,7 +25,7 @@ const { listen } = require('express/lib/application');
 // Blogs list page
 router.get("/", auth.verifyAdmin, async (req, res, next) => {
     try {
-        let blogs = await Article.find().lean();
+        let blogs = await Article.find().sort({ _id: -1 }).lean();
         res.render("pages/admin/blogs", { title: "", description: "", admin: true, blogs });
     } catch (error) {
         res.status(500).send("Something went wrong from our end, please contact the administartor or developer :)");
