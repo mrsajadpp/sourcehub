@@ -18,10 +18,10 @@
 
     </div>
     <div class="hs-docs-content-divider" name="content">
-        <link rel="stylesheet" href="./src/css/richtext.css" />
-        <script type="text/javascript" src="./src/js/rte.js"></script>
+        <link rel="stylesheet" href="/css/richtext.css" />
+        <script type="text/javascript" src="/script/rte.js"></script>
         <script>RTE_DefaultConfig.url_base = 'richtexteditor'</script>
-        <script type="text/javascript" src='./src/js/plugins.js'></script>
+        <script type="text/javascript" src='/script/plugins.js'></script>
         <div id="div_editor1">
             <p></p>
             <p><img src='' /></p>
@@ -36,7 +36,7 @@
     </form>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/script/bootstrap.bundle.min.js"></script>
 
 <script>
     document.getElementById('btn').addEventListener('click', function () {
@@ -57,7 +57,7 @@
         };
 
         // Send a POST request to the /publish API
-        fetch('/blog/write', {
+        fetch('/admin/blog/write', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -9,7 +9,7 @@
                         <div class="mb-4">
                                 <h5>Title</h5>
                                 <input type="text" class="form-control" id="title" name="title"
-                                        placeholder="{{blog.title}}">
+                                        placeholder="" value="{{blog.title}}">
                                 <p id="error1" style="font-size:11px; color:red; font-family:helvetica; display:none;">
                                         Title</p>
                         </div>
@@ -21,10 +21,10 @@
 
         </div>
         <div class="hs-docs-content-divider" name="content">
-                <link rel="stylesheet" href="./src/css/richtext.css" />
-                <script type="text/javascript" src="./src/js/rte.js"></script>
+                <link rel="stylesheet" href="/css/richtext.css" />
+                <script type="text/javascript" src="/script/rte.js"></script>
                 <script>RTE_DefaultConfig.url_base = 'richtexteditor'</script>
-                <script type="text/javascript" src='./src/js/plugins.js'></script>
+                <script type="text/javascript" src='/script/plugins.js'></script>
                 <div id="div_editor1">
                         {{{blog.content}}}
                 </div>
@@ -38,7 +38,7 @@
         </form>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/script/bootstrap.bundle.min.js"></script>
 
 <script>
         document.getElementById('btn').addEventListener('click', function () {
@@ -59,7 +59,7 @@
                 };
 
                 // Send a POST request to the /publish API
-                fetch('/blog/update/{{blog._id}}', {
+                fetch('/admin/blog/update/{{blog._id}}', {
                         method: 'POST',
                         headers: {
                                 'Content-Type': 'application/json'

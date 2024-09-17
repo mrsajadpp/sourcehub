@@ -64,7 +64,7 @@ router.post('/blog/write', auth.verifyAdmin, async (req, res) => {
             content,
             updated_at: new Date(),
             slug: slug,
-            image: firstImageSrc
+            image: firstImageSrc ? firstImageSrc : "no"
         });
 
         await blog.save();
@@ -118,6 +118,8 @@ router.post('/blog/update/:blog_id', auth.verifyAdmin, async (req, res) => {
         res.redirect('/admin/');
 
     } catch (error) {
+        console.error(error);
+        
         res.status(500).json({ error: 'Server error' });
     }
 });
